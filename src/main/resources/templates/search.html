@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Coronavirus Tracker Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <h1 style="text-align: center">Статистика COVID-19</h1>
+    <p style="text-align: center">В этом приложении перечислено текущее количество зарегистрированных случаев заболевания по всему миру</p>
+
+    <div class="jumbotron">
+        <h1 class="display-4" th:text="${st.diffFromPrevDay}"></h1>
+        <p class="lead">Изменения с предыдущего дня</p>
+        <hr class="my-4">
+        <p>
+            <span>Новые случаи, зарегистрированные с предыдущего дня:</span>
+            <span th:text="${st.latestTotalCases}"></span>
+        </p>
+
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Страна</th>
+            <th>Всего зарегистрированных случаев</th>
+            <th>Изменения с предыдущего дня</th>
+        </tr>
+        <tr>
+            <td th:text="${st.country}"></td>
+            <td th:text="${st.latestTotalCases}">0</td>
+            <td th:text="${st.diffFromPrevDay}">0</td>
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>
