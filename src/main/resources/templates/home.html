@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Coronavirus Tracker Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <h1 style="text-align: center">Статистика COVID-19</h1>
+    <p style="text-align: center">В этом приложении перечислено текущее количество зарегистрированных случаев заболевания по всему миру</p>
+
+    <div class="input-group mb-3">
+        <input id="search" type="text" class="form-control" placeholder="Поиск..." aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Поиск</button>
+    </div>
+
+
+    <script>
+        let search = document.getElementById("search");
+        let button = document.getElementById("button-addon2")
+
+        let valueInput;
+        button.addEventListener('click', () => {
+            valueInput = search.value;
+            document.location.href = "/search/" + valueInput;
+            search.value = ""
+        })
+    </script>
+
+    <div class="jumbotron">
+        <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+        <p class="lead">Общее количество случаев, зарегистрированных на сегодняшний день</p>
+        <hr class="my-4">
+        <p>
+            <span>Новые случаи, зарегистрированные с предыдущего дня:</span>
+            <span th:text="${totalNewCases}"></span>
+        </p>
+
+    </div>
+
+    <table class="table">
+        <tr>
+<!--            <th>State</th>-->
+            <th>Страна</th>
+            <th>Всего зарегистрированных случаев</th>
+            <th>Изменения с предыдущего дня</th>
+        </tr>
+        <tr th:each="locationStat : ${locationStats}">
+<!--            <td th:text="${locationStat.state}"></td>-->
+            <td th:text="${locationStat.country}"></td>
+            <td th:text="${locationStat.latestTotalCases}">0</td>
+            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>
